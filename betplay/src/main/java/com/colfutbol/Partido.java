@@ -1,16 +1,14 @@
 package com.colfutbol;
 
-import java.util.Calendar;
-
 public class Partido {
 
-    private Calendar fechaPartido;
+    private String fechaPartido;
     private Equipo equipoLocal;
     private Equipo equipoVisitante;
     private Integer golesEquipoLocal;
     private Integer golesEquipoVisitante;
 
-    public Partido(Calendar fechaPartido, Equipo equipoLocal, Equipo equipoVisitante, Integer golesEquipoLocal,
+    public Partido(String fechaPartido, Equipo equipoLocal, Equipo equipoVisitante, Integer golesEquipoLocal,
             Integer golesEquipoVisitante) {
 
         this.fechaPartido = fechaPartido;
@@ -36,7 +34,7 @@ public class Partido {
         }
     }
 
-    public Calendar getFechaPartido() {
+    public String getFechaPartido() {
         return fechaPartido;
     }
 }
