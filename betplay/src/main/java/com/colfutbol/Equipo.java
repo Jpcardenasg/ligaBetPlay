@@ -11,6 +11,9 @@ public class Equipo {
     private int golesContra;
     private int puntos;
 
+    public Equipo() {
+    }
+
     public Equipo(String nombre) {
         this.nombre = nombre;
     }
