@@ -1,30 +1,49 @@
 package com.colfutbol;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Reporte {
+public class GestorListas {
+    private List<Equipo> equipos;
+    private List<Partido> partidos;
+    private List<Jugador> jugadores;
 
-    ArrayList<Equipo> listaEquipos;
-
-    public Reporte() {
-        listaEquipos = new ArrayList<>();
+    public GestorListas() {
+        jugadores = new ArrayList<>();
+        equipos = new ArrayList<>();
     }
 
-    public ArrayList<Equipo> getListaEquipos() {
-        return listaEquipos;
+    public void addJugador(Jugador jugador) {
+        jugadores.add(jugador);
     }
 
     public void addEquipo(Equipo equipo) {
-        listaEquipos.add(equipo);
+        equipos.add(equipo);
+    }
+
+    public void addPartido(Partido partido) {
+        partidos.add(partido);
+    }
+
+    public List<Jugador> getJugadores() {
+        return jugadores;
+    }
+
+    public List<Equipo> getEquipos() {
+        return equipos;
+    }
+
+    public List<Partido> getPartidos() {
+        return partidos;
     }
 
     public Equipo equipoConMasGoles() {
-        if (listaEquipos.isEmpty()) {
+        if (equipos.isEmpty()) {
             return null;
         }
 
-        Equipo pivote = listaEquipos.get(0);
-        for (Equipo equipo : listaEquipos) {
+        Equipo pivote = equipos.get(0);
+        for (Equipo equipo : equipos) {
             boolean condicion = equipo.getGolesFavor() > pivote.getGolesFavor();
 
             if (condicion) {
@@ -35,12 +54,12 @@ public class Reporte {
     }
 
     public Equipo equipoConMasPuntos() {
-        if (listaEquipos.isEmpty()) {
+        if (equipos.isEmpty()) {
             return null;
         }
 
-        Equipo pivote = listaEquipos.get(0);
-        for (Equipo equipo : listaEquipos) {
+        Equipo pivote = equipos.get(0);
+        for (Equipo equipo : equipos) {
             boolean condicion = equipo.getPuntos() > pivote.getPuntos();
 
             if (condicion) {
@@ -51,12 +70,12 @@ public class Reporte {
     }
 
     public Equipo equipoConMasPartidosGanados() {
-        if (listaEquipos.isEmpty()) {
+        if (equipos.isEmpty()) {
             return null;
         }
 
-        Equipo pivote = listaEquipos.get(0);
-        for (Equipo equipo : listaEquipos) {
+        Equipo pivote = equipos.get(0);
+        for (Equipo equipo : equipos) {
             boolean condicion = equipo.getPartidosGanados() > pivote.getPartidosGanados();
 
             if (condicion) {
@@ -68,18 +87,18 @@ public class Reporte {
 
     public int golesTotales() {
         int golesTotales = 0;
-        for (Equipo equipo : listaEquipos) {
+        for (Equipo equipo : equipos) {
             golesTotales += equipo.getGolesFavor();
         }
         return golesTotales;
     }
 
     public int promedioGoles() {
-        if (listaEquipos.isEmpty()) {
+        if (equipos.isEmpty()) {
             return 0;
         }
         int goles = golesTotales();
-        return goles / listaEquipos.size();
+        return goles / equipos.size();
     }
 
 }

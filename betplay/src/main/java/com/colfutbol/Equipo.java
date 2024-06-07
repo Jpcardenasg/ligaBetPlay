@@ -1,5 +1,9 @@
 package com.colfutbol;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 public class Equipo {
 
     private String nombre;
@@ -10,12 +14,48 @@ public class Equipo {
     private int golesFavor;
     private int golesContra;
     private int puntos;
+    private List<Jugador> jugadores;
+    private List<Persona> cuerpoTecnico;
+    private List<Persona> cuerpoMedico;
 
     public Equipo() {
     }
 
     public Equipo(String nombre) {
         this.nombre = nombre;
+        this.jugadores = new ArrayList<>();
+        this.cuerpoMedico = new ArrayList<>();
+        this.cuerpoTecnico = new ArrayList<>();
+    }
+
+    public static Equipo registrarEquipo(Scanner sc) {
+        System.out.println("Ingrese el nombre del equipo:");
+        String nombre = sc.nextLine();
+        return new Equipo(nombre);
+    }
+
+    public List<Jugador> getJugadores() {
+        return jugadores;
+    }
+
+    public void agregarJugador(Jugador jugador) {
+        jugadores.add(jugador);
+    }
+
+    public List<Persona> getCuerpoTecnico() {
+        return cuerpoTecnico;
+    }
+
+    public void agregarCuerpoTecnico(Persona persona) {
+        cuerpoTecnico.add(persona);
+    }
+
+    public List<Persona> getCuerpoMedico() {
+        return cuerpoMedico;
+    }
+
+    public void agregarCuerpoMedico(Persona persona) {
+        cuerpoMedico.add(persona);
     }
 
     public void partidoGanado(int golesFavor, int golesContra) {
