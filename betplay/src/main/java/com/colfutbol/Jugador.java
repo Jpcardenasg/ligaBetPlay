@@ -8,9 +8,9 @@ public class Jugador extends Persona {
     private int dorsal;
     private String posicion;
     private String equipo;
-    // private int golesAnotados;
-    // private int totalTarjetaRoja;
-    // private int totalTarjetaAmarilla;
+    private int golesAnotados;
+    private int totalTarjetaRoja;
+    private int totalTarjetaAmarilla;
     private static int contadorJugadores;
 
     public Jugador() {
@@ -23,6 +23,7 @@ public class Jugador extends Persona {
         this.dorsal = dorsal;
         this.posicion = posicion;
         this.equipo = equipo;
+        this.golesAnotados = 0;
         ++Jugador.contadorJugadores;
     }
 
@@ -60,7 +61,6 @@ public class Jugador extends Persona {
         String equipo = equipos.get(opcionEquipo).getNombre();
 
         Jugador nuevoJugador = new Jugador(id, nombre, apellidos, edad, nacionalidad, dorsal, posicion, equipo);
-        gestor.addJugador(nuevoJugador);
         equipos.get(opcionEquipo).agregarJugador(nuevoJugador);
 
         return nuevoJugador;
@@ -68,6 +68,22 @@ public class Jugador extends Persona {
 
     public static int totalJugadores() {
         return Jugador.contadorJugadores;
+    }
+
+    public int getGolesAnotados() {
+        return golesAnotados;
+    }
+
+    public void setGolesAnotados(int goles) {
+        this.golesAnotados += goles;
+    }
+
+    public int getTotalTarjetaRoja() {
+        return totalTarjetaRoja;
+    }
+
+    public int getTotalTarjetaAmarilla() {
+        return totalTarjetaAmarilla;
     }
 
     @Override

@@ -1,18 +1,18 @@
 package com.colfutbol;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
     public static Scanner sc = new Scanner(System.in);
 
-    public static void menuReportes(GestorListas equipos) {
+    public static void menuReportes(GestorListas gestor) {
         boolean flag = true;
-        Equipo equipo;
 
         while (flag) {
             System.out.println(
-                    "Ingrese alguna de las siguientes opciones:\n1.Equipo con más goles anotados\n2.Equipo con más puntos\n3.Equipo con más partidos ganados\n4.Total goles anotados\n5.Promedio goles anotados\n0.Salir");
+                    "Ingrese alguna de las siguientes opciones:\n1.Equipo con más goles anotados\n2.Equipo con más puntos\n3.Equipo con más partidos ganados\n4.Total goles anotados\n5.Promedio goles anotados\n6.Tabla de posiciones\n0.Salir");
             int opcion = -1;
             try {
                 opcion = Integer.parseInt(sc.nextLine());
@@ -23,24 +23,53 @@ public class Main {
 
             switch (opcion) {
                 case 1:
-                    equipo = equipos.equipoConMasGoles();
-                    System.out.println(String.format("El equipo con más goles es '%s'", equipo.getNombre()));
+                    Equipo equipoConMasGoles = gestor.equipoConMasGoles();
+                    if (equipoConMasGoles != null) {
+                        System.out.println(
+                                String.format("El equipo con más goles es '%s'", equipoConMasGoles.getNombre()));
+                    } else {
+                        System.out.println("No hay equipos registrados.");
+                    }
                     break;
                 case 2:
-                    equipo = equipos.equipoConMasPuntos();
-                    System.out.println(String.format("El equipo con más puntos es '%s'", equipo.getNombre()));
+                    Equipo equipoConMasPuntos = gestor.equipoConMasPuntos();
+                    if (equipoConMasPuntos != null) {
+                        System.out.println(
+                                String.format("El equipo con más puntos es '%s'", equipoConMasPuntos.getNombre()));
+                    } else {
+                        System.out.println("No hay equipos registrados.");
+                    }
                     break;
                 case 3:
-                    equipo = equipos.equipoConMasPartidosGanados();
-                    System.out.println(String.format("El equipo con más partidos ganados es '%s'", equipo.getNombre()));
+                    Equipo equipoConMasPartidosGanados = gestor.equipoConMasPartidosGanados();
+                    if (equipoConMasPartidosGanados != null) {
+                        System.out.println(
+                                String.format("El equipo con más partidos ganados es '%s'",
+                                        equipoConMasPartidosGanados.getNombre()));
+                    } else {
+                        System.out.println("No hay equipos registrados.");
+                    }
                     break;
                 case 4:
-                    int golesTotal = equipos.golesTotales();
+                    int golesTotal = gestor.golesTotales();
                     System.out.println(String.format("El total de goles anotados es '%s'", golesTotal));
                     break;
                 case 5:
-                    int golesPromedio = equipos.promedioGoles();
+                    int golesPromedio = gestor.promedioGoles();
                     System.out.println(String.format("El promedio de goles anotados es '%s'", golesPromedio));
+                    break;
+                case 6:
+                    List<Equipo> tablaPosiciones = gestor.tablaDePosiciones();
+                    if (tablaPosiciones != null && !tablaPosiciones.isEmpty()) {
+                        System.out.println("Tabla de posiciones:");
+                        for (int i = 0; i < tablaPosiciones.size(); i++) {
+                            Equipo equipo = tablaPosiciones.get(i);
+                            System.out.println(
+                                    (i + 1) + ". " + equipo.getNombre() + " - " + equipo.getPuntos() + " puntos");
+                        }
+                    } else {
+                        System.out.println("No hay equipos registrados.");
+                    }
                     break;
                 case 0:
                     flag = false;
@@ -73,7 +102,7 @@ public class Main {
                     System.out.println(String.format("El equipo %s se agregó correctamente", nuevoEquipo.getNombre()));
                     break;
                 case 2:
-                    Partido nuevoPartido = Partido.registrarPartido(gestor.getEquipos());
+                    Partido nuevoPartido = Partido.registrarPartido(gestor);
                     if (nuevoPartido != null) {
                         gestor.addPartido(nuevoPartido);
                         nuevoPartido.asignarPuntos();
@@ -82,14 +111,27 @@ public class Main {
                     break;
                 case 3:
                     Jugador nuevoJugador = Jugador.registrarJugador(sc, gestor);
-                    gestor.addJugador(nuevoJugador);
-                    System.out.println(String.format("El jugador '%s' ha sido registrado", nuevoJugador.getNombre()));
+                    if (nuevoJugador != null) {
+                        gestor.addJugador(nuevoJugador);
+                        System.out.println(
+                                String.format("El jugador '%s' ha sido registrado", nuevoJugador.getNombre()));
+                    }
                     break;
                 case 4:
-                    // registrar profesional de cuerpo técnico
+                    CuerpoTecnico nuevoTecnico = CuerpoTecnico.registrarCuerpoTecnico(sc, gestor);
+                    if (nuevoTecnico != null) {
+                        gestor.addCuerpoTecnico(nuevoTecnico);
+                        System.out.println(String.format("El profesional del cuerpo técnico '%s' ha sido registrado",
+                                nuevoTecnico.getNombre()));
+                    }
                     break;
                 case 5:
-                    // registrar profesional de cuerpo médico
+                    CuerpoMedico nuevoMedico = CuerpoMedico.registrarCuerpoMedico(sc, gestor);
+                    if (nuevoMedico != null) {
+                        gestor.addCuerpoMedico(nuevoMedico);
+                        System.out.println(String.format("El profesional del cuerpo médico '%s' ha sido registrado",
+                                nuevoMedico.getNombre()));
+                    }
                     break;
                 case 0:
                     flag = false;
@@ -105,7 +147,7 @@ public class Main {
 
         System.out.println("Bienvenido al sistema de administración de la liga BetPlay:");
 
-        GestorListas gestor = new GestorListas();
+        GestorListas listas = new GestorListas();
 
         boolean flag = true;
 
@@ -115,16 +157,16 @@ public class Main {
             try {
                 opcion = Integer.parseInt(sc.nextLine());
             } catch (NumberFormatException e) {
-                System.out.println("Opción no válida. Intente nuevamente.");
+                System.out.println("Entrada no válida. Intente nuevamente.");
                 continue;
             }
 
             switch (opcion) {
                 case 1:
-                    registros(gestor);
+                    registros(listas);
                     break;
                 case 2:
-                    menuReportes(gestor);
+                    menuReportes(listas);
                     break;
                 case 0:
                     flag = false;

@@ -1,16 +1,22 @@
 package com.colfutbol;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class GestorListas {
     private List<Equipo> equipos;
     private List<Partido> partidos;
     private List<Jugador> jugadores;
+    private List<CuerpoMedico> cuerpoMedico;
+    private List<CuerpoTecnico> cuerpoTecnico;
 
     public GestorListas() {
         jugadores = new ArrayList<>();
         equipos = new ArrayList<>();
+        partidos = new ArrayList<>();
+        cuerpoMedico = new ArrayList<>();
+        cuerpoTecnico = new ArrayList<>();
     }
 
     public void addJugador(Jugador jugador) {
@@ -25,6 +31,14 @@ public class GestorListas {
         partidos.add(partido);
     }
 
+    public void addCuerpoMedico(CuerpoMedico cMedico) {
+        cuerpoMedico.add(cMedico);
+    }
+
+    public void addCuerpoTecnico(CuerpoTecnico cTecnico) {
+        cuerpoTecnico.add(cTecnico);
+    }
+
     public List<Jugador> getJugadores() {
         return jugadores;
     }
@@ -35,6 +49,38 @@ public class GestorListas {
 
     public List<Partido> getPartidos() {
         return partidos;
+    }
+
+    public List<CuerpoMedico> getCuerpoMedicos() {
+        return cuerpoMedico;
+    }
+
+    public List<CuerpoTecnico> getCuerpoTecnico() {
+        return cuerpoTecnico;
+    }
+
+    public boolean existeCuerpoTecnico(int id) {
+        for (CuerpoTecnico tecnico : cuerpoTecnico) {
+            if (tecnico.getId() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean existeCuerpoMedico(int id) {
+        for (CuerpoMedico medico : cuerpoMedico) {
+            if (medico.getId() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public List<Equipo> tablaDePosiciones() {
+        List<Equipo> equiposOrdenados = new ArrayList<>(equipos);
+        equiposOrdenados.sort(Comparator.comparingInt(Equipo::getPuntos).reversed());
+        return equiposOrdenados;
     }
 
     public Equipo equipoConMasGoles() {
