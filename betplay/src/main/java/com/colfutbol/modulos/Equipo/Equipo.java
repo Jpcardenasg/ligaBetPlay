@@ -1,8 +1,10 @@
-package com.colfutbol;
+package com.colfutbol.modulos.Equipo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
+import com.colfutbol.modulos.Jugador.Jugador;
+import com.colfutbol.modulos.Persona.Persona;
 
 public class Equipo {
 
@@ -26,12 +28,6 @@ public class Equipo {
         this.jugadores = new ArrayList<>();
         this.cuerpoMedico = new ArrayList<>();
         this.cuerpoTecnico = new ArrayList<>();
-    }
-
-    public static Equipo registrarEquipo(Scanner sc) {
-        System.out.println("Ingrese el nombre del equipo:");
-        String nombre = sc.nextLine();
-        return new Equipo(nombre);
     }
 
     public List<Jugador> getJugadores() {

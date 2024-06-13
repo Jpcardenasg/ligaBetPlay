@@ -1,80 +1,22 @@
-package com.colfutbol;
+package com.colfutbol.modulos.Equipo;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class GestorListas {
+public class GestorEquipos {
     private List<Equipo> equipos;
-    private List<Partido> partidos;
-    private List<Jugador> jugadores;
-    private List<CuerpoMedico> cuerpoMedico;
-    private List<CuerpoTecnico> cuerpoTecnico;
 
-    public GestorListas() {
-        jugadores = new ArrayList<>();
+    public GestorEquipos() {
         equipos = new ArrayList<>();
-        partidos = new ArrayList<>();
-        cuerpoMedico = new ArrayList<>();
-        cuerpoTecnico = new ArrayList<>();
-    }
-
-    public void addJugador(Jugador jugador) {
-        jugadores.add(jugador);
     }
 
     public void addEquipo(Equipo equipo) {
         equipos.add(equipo);
     }
 
-    public void addPartido(Partido partido) {
-        partidos.add(partido);
-    }
-
-    public void addCuerpoMedico(CuerpoMedico cMedico) {
-        cuerpoMedico.add(cMedico);
-    }
-
-    public void addCuerpoTecnico(CuerpoTecnico cTecnico) {
-        cuerpoTecnico.add(cTecnico);
-    }
-
-    public List<Jugador> getJugadores() {
-        return jugadores;
-    }
-
     public List<Equipo> getEquipos() {
         return equipos;
-    }
-
-    public List<Partido> getPartidos() {
-        return partidos;
-    }
-
-    public List<CuerpoMedico> getCuerpoMedicos() {
-        return cuerpoMedico;
-    }
-
-    public List<CuerpoTecnico> getCuerpoTecnico() {
-        return cuerpoTecnico;
-    }
-
-    public boolean existeCuerpoTecnico(int id) {
-        for (CuerpoTecnico tecnico : cuerpoTecnico) {
-            if (tecnico.getId() == id) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean existeCuerpoMedico(int id) {
-        for (CuerpoMedico medico : cuerpoMedico) {
-            if (medico.getId() == id) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public List<Equipo> tablaDePosiciones() {
@@ -146,5 +88,4 @@ public class GestorListas {
         int goles = golesTotales();
         return goles / equipos.size();
     }
-
 }

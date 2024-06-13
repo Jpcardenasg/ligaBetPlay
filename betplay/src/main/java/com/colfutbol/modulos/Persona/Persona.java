@@ -1,4 +1,4 @@
-package com.colfutbol;
+package com.colfutbol.modulos.Persona;
 
 public class Persona {
 

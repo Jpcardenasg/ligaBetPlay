@@ -3,6 +3,12 @@ package com.colfutbol;
 import java.util.List;
 import java.util.Scanner;
 
+import com.colfutbol.modulos.Cuerpo.*;
+import com.colfutbol.modulos.Equipo.*;
+import com.colfutbol.modulos.Gestor.GestorListas;
+import com.colfutbol.modulos.Jugador.*;
+import com.colfutbol.modulos.Partido.*;
+
 public class Main {
 
     public static Scanner sc = new Scanner(System.in);
@@ -82,6 +88,7 @@ public class Main {
     }
 
     public static void registros(GestorListas gestor) {
+
         boolean flag = true;
 
         while (flag) {
@@ -97,12 +104,12 @@ public class Main {
 
             switch (opcion) {
                 case 1:
-                    Equipo nuevoEquipo = Equipo.registrarEquipo(sc);
+                    Equipo nuevoEquipo = EquipoService.registrarEquipo(sc);
                     gestor.addEquipo(nuevoEquipo);
                     System.out.println(String.format("El equipo %s se agregó correctamente", nuevoEquipo.getNombre()));
                     break;
                 case 2:
-                    Partido nuevoPartido = Partido.registrarPartido(gestor);
+                    Partido nuevoPartido = PartidoService.registrarPartido(gestor);
                     if (nuevoPartido != null) {
                         gestor.addPartido(nuevoPartido);
                         nuevoPartido.asignarPuntos();
@@ -110,7 +117,7 @@ public class Main {
                     }
                     break;
                 case 3:
-                    Jugador nuevoJugador = Jugador.registrarJugador(sc, gestor);
+                    Jugador nuevoJugador = JugadorService.registrarJugador(sc, gestor);
                     if (nuevoJugador != null) {
                         gestor.addJugador(nuevoJugador);
                         System.out.println(
@@ -118,7 +125,7 @@ public class Main {
                     }
                     break;
                 case 4:
-                    CuerpoTecnico nuevoTecnico = CuerpoTecnico.registrarCuerpoTecnico(sc, gestor);
+                    CuerpoTecnico nuevoTecnico = RegistroService.registrarCuerpoTecnico(sc, gestor);
                     if (nuevoTecnico != null) {
                         gestor.addCuerpoTecnico(nuevoTecnico);
                         System.out.println(String.format("El profesional del cuerpo técnico '%s' ha sido registrado",
@@ -126,7 +133,7 @@ public class Main {
                     }
                     break;
                 case 5:
-                    CuerpoMedico nuevoMedico = CuerpoMedico.registrarCuerpoMedico(sc, gestor);
+                    CuerpoMedico nuevoMedico = RegistroService.registrarCuerpoMedico(sc, gestor);
                     if (nuevoMedico != null) {
                         gestor.addCuerpoMedico(nuevoMedico);
                         System.out.println(String.format("El profesional del cuerpo médico '%s' ha sido registrado",
