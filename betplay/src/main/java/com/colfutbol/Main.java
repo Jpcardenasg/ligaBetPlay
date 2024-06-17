@@ -3,11 +3,15 @@ package com.colfutbol;
 import java.util.List;
 import java.util.Scanner;
 
-import com.colfutbol.modulos.Cuerpo.*;
-import com.colfutbol.modulos.Equipo.*;
+import com.colfutbol.CuerpoTecnico.application.RegistroService;
+import com.colfutbol.CuerpoTecnico.domain.CuerpoTecnico;
+import com.colfutbol.Equipo.application.EquipoService;
+import com.colfutbol.Equipo.domain.Equipo;
+import com.colfutbol.Jugador.application.JugadorService;
+import com.colfutbol.Jugador.domain.Jugador;
+import com.colfutbol.Partido.application.PartidoService;
+import com.colfutbol.Partido.domain.Partido;
 import com.colfutbol.modulos.Gestor.GestorListas;
-import com.colfutbol.modulos.Jugador.*;
-import com.colfutbol.modulos.Partido.*;
 
 public class Main {
 
@@ -93,7 +97,7 @@ public class Main {
 
         while (flag) {
             System.out.println(
-                    "Ingrese alguna de las siguientes opciones:\n1.Registrar Equipo\n2.Registrar partido\n3.Registrar jugador\n4.Registrar profesional de cuerpo técnico\n5.Registrar profesional de cuerpo médico\n0.Salir");
+                    "Ingrese alguna de las siguientes opciones:\n1.Registrar Equipo\n2.Registrar partido\n3.Registrar jugador\n4.Registrar profesional de cuerpo técnico\n0.Salir");
             int opcion = -1;
             try {
                 opcion = Integer.parseInt(sc.nextLine());
@@ -130,14 +134,6 @@ public class Main {
                         gestor.addCuerpoTecnico(nuevoTecnico);
                         System.out.println(String.format("El profesional del cuerpo técnico '%s' ha sido registrado",
                                 nuevoTecnico.getNombre()));
-                    }
-                    break;
-                case 5:
-                    CuerpoMedico nuevoMedico = RegistroService.registrarCuerpoMedico(sc, gestor);
-                    if (nuevoMedico != null) {
-                        gestor.addCuerpoMedico(nuevoMedico);
-                        System.out.println(String.format("El profesional del cuerpo médico '%s' ha sido registrado",
-                                nuevoMedico.getNombre()));
                     }
                     break;
                 case 0:

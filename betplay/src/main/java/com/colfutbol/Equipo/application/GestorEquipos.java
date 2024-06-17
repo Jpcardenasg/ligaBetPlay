@@ -1,66 +1,24 @@
-package com.colfutbol.modulos.Gestor;
+package com.colfutbol.Equipo.application;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import com.colfutbol.CuerpoTecnico.domain.CuerpoTecnico;
 import com.colfutbol.Equipo.domain.Equipo;
-import com.colfutbol.Jugador.domain.Jugador;
-import com.colfutbol.Partido.domain.Partido;
 
-public class GestorListas {
+public class GestorEquipos {
     private List<Equipo> equipos;
-    private List<Partido> partidos;
-    private List<Jugador> jugadores;
-    private List<CuerpoTecnico> cuerpoTecnico;
 
-    public GestorListas() {
-        jugadores = new ArrayList<>();
+    public GestorEquipos() {
         equipos = new ArrayList<>();
-        partidos = new ArrayList<>();
-        cuerpoTecnico = new ArrayList<>();
-    }
-
-    public void addJugador(Jugador jugador) {
-        jugadores.add(jugador);
     }
 
     public void addEquipo(Equipo equipo) {
         equipos.add(equipo);
     }
 
-    public void addPartido(Partido partido) {
-        partidos.add(partido);
-    }
-
-    public void addCuerpoTecnico(CuerpoTecnico cTecnico) {
-        cuerpoTecnico.add(cTecnico);
-    }
-
-    public List<Jugador> getJugadores() {
-        return jugadores;
-    }
-
     public List<Equipo> getEquipos() {
         return equipos;
-    }
-
-    public List<Partido> getPartidos() {
-        return partidos;
-    }
-
-    public List<CuerpoTecnico> getCuerpoTecnico() {
-        return cuerpoTecnico;
-    }
-
-    public boolean existeCuerpoTecnico(int id) {
-        for (CuerpoTecnico tecnico : cuerpoTecnico) {
-            if (tecnico.getId() == id) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public List<Equipo> tablaDePosiciones() {
